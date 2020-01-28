@@ -11,7 +11,7 @@ const cars = [{
 }, {
   'id': '697a943f-89f5-4a81-914d-ecefaa7784ed',
   'name': 'mercedes-class-a',
-  'pricePerDay': 44,
+  'pricePerDay': 44, 
   'pricePerKm': 0.30
 }, {
   'id': '4afcc3a2-bbf4-44e8-b739-0179a6cd8b7d',
@@ -157,6 +157,22 @@ const actors = [{
     'amount': 0
   }]
 }];
+
+function rentalPrice (car, days, distance) {
+  return (days * car.pricePerDay + distance * car.pricePerKm);
+}
+
+rentals.forEach((driver) =>
+  {cars.forEach((car)=>{  
+    if (driver.carId==car.id){
+      var pickupdate = new Date(driver.pickupDate);
+      var returndate = new Date(driver.returnDate);
+      var days = Math.abs(returndate - pickupdate);
+      days = Math.ceil(days/(1000*60*60*24))+1;
+      driver.price = rentalPrice (car,days, driver.distance);
+    }
+  })
+});
 
 console.log(cars);
 console.log(rentals);
