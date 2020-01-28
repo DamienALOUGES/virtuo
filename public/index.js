@@ -170,9 +170,20 @@ rentals.forEach((driver) =>
       var days = Math.abs(returndate - pickupdate);
       days = Math.ceil(days/(1000*60*60*24))+1;
       driver.price = rentalPrice (car,days, driver.distance);
+      if (days>10){
+        driver.price = driver.price * 0.5
+      }
+      else if (days>4){
+        driver.price = driver.price * 0.7
+      }
+      else if (days>1){
+        driver.price = driver.price * 0.9
+      }
     }
   })
 });
+
+
 
 console.log(cars);
 console.log(rentals);
